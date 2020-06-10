@@ -23,5 +23,11 @@ public class Accumul {
             result.add(strList);
         }
         return String.join("-", result);
+
+        //ToDO:Streamバージョンもやる
+        //mapを使って変換をかける？
+        //文字の数を増やすのと先頭を大文字にする変換の2つが必要
+        //メソッドを切ればいける…？
+//        return "";
     }
 }
