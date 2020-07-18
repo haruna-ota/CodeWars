@@ -1,7 +1,7 @@
 package counting_duplicates;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /***
@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  "ABBA" -> 2 # 'A' and 'B' each occur twice
  ***/
 
-public class CountingDuplicates {
+public class CountingDuplicatesWithGroupingBy {
     public static void main(String[] args) {
         String text = "aabbcde";
         System.out.println(duplicateCount(text));
@@ -27,19 +27,8 @@ public class CountingDuplicates {
 
     public static int duplicateCount(String text) {
         // Write your code here
-        Object[] strings = Stream.of(text.toLowerCase().split("")).toArray();
-        Object[] distinct = Stream.of(text.toLowerCase().split("")).distinct().toArray();
-        List<Integer> numberOfAppearance = new ArrayList<>();
-
-        for (Object Distinct : distinct) {
-            int count = 0;
-            for (int j = 0; j < text.length(); j++) {
-                if (Distinct.equals(strings[j])) {
-                    count++;
-                }
-            }
-            numberOfAppearance.add(count);
-        }
-        return (int) numberOfAppearance.stream().filter(n -> n > 1).count();
+        Map<String, Long> map = Stream.of(text.toLowerCase().split("")).collect(Collectors.groupingBy(s -> s, Collectors.counting()));
+//        System.out.println(map);
+        return (int) map.entrySet().stream().filter(e -> e.getValue() > 1).count();
     }
 }

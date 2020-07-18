@@ -22,16 +22,33 @@ public class Persist {
         System.out.println(persistence(n));
     }
 
+    //    public static int persistence(long n) {
+//        return String.valueOf(n).length() == 1 ? 0 : persistence(n, 0);
+//    }
+//
+//    public static int persistence(long n, int acc) {
+//        // your code
+//        int multiple = Stream.of(String.valueOf(n).split(""))
+//                .mapToInt(Integer::parseInt)
+//                .reduce(1, (a, num) -> a * num);
+//        acc++;
+//        return String.valueOf(multiple).length() > 1 ? persistence(multiple, acc) : acc;
+//    }
     public static int persistence(long n) {
-        return String.valueOf(n).length() == 1 ? 0 : persistence(n, 0);
+        return persistence(n, 0);
     }
 
     public static int persistence(long n, int acc) {
-        // your code
-        int multiple = Stream.of(String.valueOf(n).split(""))
-                .mapToInt(Integer::parseInt)
-                .reduce(1, (a, num) -> a * num);
-        acc++;
-        return String.valueOf(multiple).length() > 1 ? persistence(multiple, acc) : acc;
+//        if (String.valueOf(n).length() == 1) {
+//            return acc;
+//        }
+//        int multiple = Stream.of(String.valueOf(n).split(""))
+//                .mapToInt(Integer::parseInt)
+//                .reduce(1, (a, num) -> a * num);
+//        return persistence(multiple, acc + 1);
+        return String.valueOf(n).length() == 1 ? acc :
+                persistence(Stream.of(String.valueOf(n).split(""))
+                                    .mapToInt(Integer::parseInt)
+                                    .reduce(1, (a, num) -> a * num), acc + 1);
     }
 }
